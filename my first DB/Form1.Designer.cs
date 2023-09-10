@@ -66,7 +66,7 @@
             Edit.Text = "  Edit";
             Edit.TextAlign = ContentAlignment.MiddleLeft;
             Edit.UseVisualStyleBackColor = true;
-            Edit.Click += button2_Click;
+            Edit.Click += Edit_Click;
             // 
             // Add
             // 

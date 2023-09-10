@@ -44,72 +44,61 @@ namespace my_first_DB
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Edit_Click(object sender, EventArgs e)
         {
-            int userIdToUpdate = 1;
+            int userIdToUpdate = 6;
+            string newName = string.Empty;
+            int newAge = 0;
 
-            // Prompt the user to select what data they want to edit 
-            DialogResult dialogResult = MessageBox.Show("Do you want to edit Name?", "Edit Options", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dialogResult == DialogResult.Yes)
+            // Prompt the user for the new name
+            if (MessageBox.Show("Enter New Name:", "Name Input", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                // Edit Name 
-                string newName = string.Empty;
+                newName = Microsoft.VisualBasic.Interaction.InputBox("Enter New Name:", "Name Input", "");
 
-                // Prompt the user for the new name 
-                if (MessageBox.Show("Press OK to Continue", "Name", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                {
-                    newName = Microsoft.VisualBasic.Interaction.InputBox("Enter New Name: ", "Name Input", "");
-                }
-                else
-                {
-                    return;
-                }
 
-                // Update the name in the database 
-                using (SQLiteCommand command = new SQLiteCommand("UPDATE Users SET Name = @NewName WHERE Id = @UserId", connection))
-                {
-                    command.Parameters.AddWithValue("@NewName", newName);
-                    command.Parameters.AddWithValue("@UserId", userIdToUpdate);
-                    command.ExecuteNonQuery();
-
-                    MessageBox.Show("Name updated successfully!");
-                }
-
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                int newAge = 2;
-
-                // Prompt the user for the new age 
-                if (MessageBox.Show("Enter New Age:", "Age Input", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                {
-                    string newAgeInput = Microsoft.VisualBasic.Interaction.InputBox("Enter New Age:", "Age Input", "");
-                    if (int.TryParse(newAgeInput, out newAge) == false)
-                    {
-                        MessageBox.Show("Invalid age input.");
-                        return;
-                    }
-
-                }
-                else
-                {
-                    return;
-                }
-                using (SQLiteCommand command = new SQLiteCommand("UPDATE Users SET Age = @NewAge WHERE Id = @UserId", connection))
-                {
-                    command.Parameters.AddWithValue("@NewAge", newAge);
-                    command.Parameters.AddWithValue("@UserId", userIdToUpdate);
-                    command.ExecuteNonQuery();
-
-                    MessageBox.Show("Age updated successfully!");
-                }
             }
             else
             {
                 return;
             }
+            // Prompt the user for the new age 
+            if (MessageBox.Show("Enter New Age:", "Age Input", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                string newAgeInput = Microsoft.VisualBasic.Interaction.InputBox("Enter New Age:", "Age Input", "");
+                if (int.TryParse(newAgeInput, out newAge) == false)
+                {
+                    MessageBox.Show("Invalid age input ");
+                    return;
+                }
+
+            }
+            else
+            {
+                return;
+            }
+            // Update the name in the database 
+            using (SQLiteCommand command = new SQLiteCommand("UPDATE Users SET Name = @NewName, Age = @NewAge WHERE Id = @UserId", connection))
+            {
+                command.Parameters.AddWithValue("@NewName", newName);
+                command.Parameters.AddWithValue("@NewAge", newAge);
+                command.Parameters.AddWithValue("@UserId", userIdToUpdate);
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Record updated successfully!");
+                }
+
+                else
+                {
+                    MessageBox.Show("Record not found");
+                }
+
+
+            }
+
         }
+            
 
         private void Add_Click(object sender, EventArgs e)
         {
