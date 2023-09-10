@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             label1 = new Label();
+            Edit = new Button();
+            Add = new Button();
+            Delete = new Button();
+            reset = new Button();
             SuspendLayout();
             // 
             // button1
@@ -51,13 +56,64 @@
             label1.TabIndex = 1;
             label1.Text = "Download Database";
             // 
+            // Edit
+            // 
+            Edit.Image = (Image)resources.GetObject("Edit.Image");
+            Edit.Location = new Point(546, 214);
+            Edit.Name = "Edit";
+            Edit.Size = new Size(132, 58);
+            Edit.TabIndex = 2;
+            Edit.Text = "  Edit";
+            Edit.TextAlign = ContentAlignment.MiddleLeft;
+            Edit.UseVisualStyleBackColor = true;
+            Edit.Click += button2_Click;
+            // 
+            // Add
+            // 
+            Add.Image = (Image)resources.GetObject("Add.Image");
+            Add.Location = new Point(546, 114);
+            Add.Name = "Add";
+            Add.Size = new Size(132, 58);
+            Add.TabIndex = 3;
+            Add.Text = "  Add";
+            Add.TextAlign = ContentAlignment.MiddleLeft;
+            Add.UseVisualStyleBackColor = true;
+            Add.Click += Add_Click;
+            // 
+            // Delete
+            // 
+            Delete.Image = (Image)resources.GetObject("Delete.Image");
+            Delete.Location = new Point(546, 330);
+            Delete.Name = "Delete";
+            Delete.Size = new Size(132, 58);
+            Delete.TabIndex = 4;
+            Delete.Text = " Delete";
+            Delete.TextAlign = ContentAlignment.MiddleLeft;
+            Delete.UseVisualStyleBackColor = true;
+            Delete.Click += Delete_Click;
+            // 
+            // reset
+            // 
+            reset.Location = new Point(12, 12);
+            reset.Name = "reset";
+            reset.Size = new Size(46, 26);
+            reset.TabIndex = 5;
+            reset.Text = "reset";
+            reset.UseVisualStyleBackColor = true;
+            reset.Click += reset_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(reset);
+            Controls.Add(Delete);
+            Controls.Add(Add);
+            Controls.Add(Edit);
             Controls.Add(label1);
             Controls.Add(button1);
+            ForeColor = Color.Black;
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -68,5 +124,9 @@
 
         private Button button1;
         private Label label1;
+        private Button Edit;
+        private Button Add;
+        private Button Delete;
+        private Button reset;
     }
 }
